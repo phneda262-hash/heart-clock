@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+
+<title>Heart Clock ♡</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+
+    font-family: "Mochiy Pop One", sans-serif;
+    color: #db7d86;
+}
+
+
+
+.clock-container {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+}
+
+
+
+
+.heart {
+    position: relative;
+
+
+    width: min(390px, 88vw);
+    aspect-ratio: 1 / 0.9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    filter:
+        drop-shadow(
+            0 0 13px
+            rgba(219, 125, 134, 0.16)
+        );
+
+}
+
+
+
+.heart svg {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+}
+
+
+.heart-shape {
+
+
+    fill: transparent;
+
+    stroke: #db7d86;
+
+    stroke-width: 2.5;
+
+    stroke-linejoin: round;
+
+}
+
+
+
+.clock-content {
+
+    position: absolute;
+
+
+    top: 49%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 2;
+
+    width: 68%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: #db7d86;
+
+}
+
+
+
+.time {
+
+    font-size: clamp(
+        18px,
+        5vw,
+        31px
+    );
+
+    line-height: 1.15;
+
+    letter-spacing: 0.5px;
+
+    white-space: nowrap;
+
+    color: #db7d86;
+
+}
+
+
+
+.date {
+
+    margin-top: 8px;
+
+    font-size: clamp(
+        6px,
+        1.7vw,
+        9px
+    );
+
+    line-height: 1.3;
+
+    white-space: nowrap;
+
+    color: #db7d86;
+
+}
+
+
+
+.zone {
+
+    margin-top: 4px;
+
+    font-size: 6px;
+
+    white-space: nowrap;
+
+    color: #db7d86;
+
+    opacity: 0.72;
+
+}
+
+
+
+.decor {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -18px;
+
+    transform: translateX(-50%);
+
+    z-index: 5;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+
+    color: #db7d86;
+
+}
+
+
+
+@media (max-width: 450px) {
+
+    .heart {
+        width: 92vw;
+    }
+
+    .clock-content {
+        width: 65%;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="clock-container">
+
+    <div class="heart">
+
+        <!-- ACTUAL HEART -->
+
+        <svg
+            viewBox="0 0 200 180"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+        >
+
+            <path
+                class="heart-shape"
+                d="
+                    M100 170
+
+                    C90 160 20 115 20 55
+
+                    C20 25 43 8 68 8
+
+                    C84 8 96 17 100 32
+
+                    C104 17 116 8 132 8
+
+                    C157 8 180 25 180 55
+
+                    C180 115 110 160 100 170
+
+                    Z
+                "
+            />
+
+        </svg>
+
+
+        <!-- CLOCK TEXT -->
+
+        <div class="clock-content">
+
+            <div
+                class="time"
+                id="time"
+            >
+                12:00:00 PM
+            </div>
+
+
+            <div
+                class="date"
+                id="date"
+            >
+                Saturday, August 29
+            </div>
+
+
+            <div class="zone">
+                GMT+8 ♡
+            </div>
+
+        </div>
+
+
+        <!-- LITTLE DECORATION -->
+
+        <div class="decor">
+            ♡ ִ (ˆᗜˆ) ִ ♡
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function updateClock() {
+
+    const now = new Date();
+
+
+    /* TIME */
+
+    const timeOptions = {
+
+        timeZone: "Asia/Manila",
+
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+
+        hour12: true
+
+    };
+
+
+    const dateOptions = {
+
+        timeZone: "Asia/Manila",
+
+        weekday: "long",
+        month: "long",
+        day: "numeric"
+
+    };
+
+
+    const time =
+        new Intl.DateTimeFormat(
+            "en-US",
+            timeOptions
+        ).format(now);
+
+
+    const date =
+        new Intl.DateTimeFormat(
+            "en-US",
+            dateOptions
+        ).format(now);
+
+
+    document.getElementById("time")
+        .textContent = time;
+
+
+    document.getElementById("date")
+        .textContent = date;
+
+}
+
+
+
+updateClock();
+
+
+
+setInterval(
+    updateClock,
+    1000
+);
+
+</script>
+
+</body>
+</html>
