@@ -1,1027 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<!-- Mochiy Pop One -->
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
-
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap"
-    rel="stylesheet"
->
-
-<title>Heart Analog Clock ♡</title>
-
-
-<style>
-
-/* =========================================
-   GENERAL
-========================================= */
-
-* {
-    box-sizing: border-box;
-}
-
-
-html,
-body {
-
-    margin: 0;
-    padding: 0;
-
-    width: 100%;
-    height: 100%;
-
-}
-
-
-body {
-
-    min-height: 100vh;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    /*
-       Notion dark mode background
-    */
-    background: #191919;
-
-    font-family:
-        "Mochiy Pop One",
-        sans-serif;
-
-    color: #db7d86;
-
-}
-
-
-/* =========================================
-   CLOCK CONTAINER
-========================================= */
-
-.clock-container {
-
-    width: 100%;
-
-    min-height: 100vh;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #191919;
-
-}
-
-
-/* =========================================
-   HEART
-========================================= */
-
-.heart {
-
-    position: relative;
-
-    /*
-       Heart size
-    */
-    width: min(390px, 88vw);
-
-    aspect-ratio: 1 / 0.9;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-}
-
-
-/* =========================================
-   HEART SVG
-========================================= */
-
-.heart svg {
-
-    position: absolute;
-
-    width: 100%;
-    height: 100%;
-
-    overflow: visible;
-
-    /*
-       Very subtle glow that follows
-       the heart outline.
-
-       The first layer is slightly closer
-       to the outline.
-
-       The second layer is softer and wider.
-    */
-
-    filter:
-
-        drop-shadow(
-            0 0 4px
-            rgba(219, 125, 134, 0.16)
-        )
-
-        drop-shadow(
-            0 0 9px
-            rgba(219, 125, 134, 0.07)
-        );
-
-}
-
-
-/* =========================================
-   HEART OUTLINE
-========================================= */
-
-.heart-shape {
-
-    /*
-       Transparent inside
-    */
-
-    fill: transparent;
-
-    /*
-       Pink outline
-    */
-
-    stroke: #db7d86;
-
-    stroke-width: 2.5;
-
-    stroke-linejoin: round;
-
-}
-
-
-/* =========================================
-   ANALOG CLOCK
-========================================= */
-
-.analog-clock {
-
-    position: absolute;
-
-    /*
-       Places the analog clock
-       in the upper-middle part
-       of the heart.
-    */
-
-    top: 40%;
-
-    left: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    width: min(170px, 42vw);
-
-    aspect-ratio: 1;
-
-    border:
-
-        2px solid
-        #db7d86;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: #db7d86;
-
-}
-
-
-/* =========================================
-   CLOCK CENTER DOT
-========================================= */
-
-.center-dot {
-
-    position: absolute;
-
-    width: 8px;
-    height: 8px;
-
-    background: #db7d86;
-
-    border-radius: 50%;
-
-    z-index: 10;
-
-}
-
-
-/* =========================================
-   CLOCK HANDS
-========================================= */
-
-.hand {
-
-    position: absolute;
-
-    left: 50%;
-
-    bottom: 50%;
-
-    background: #db7d86;
-
-    border-radius: 5px;
-
-    transform-origin:
-        bottom center;
-
-    transform:
-        translateX(-50%)
-        rotate(0deg);
-
-}
-
-
-/* Hour hand */
-
-.hour-hand {
-
-    height: 29%;
-
-    width: 4px;
-
-}
-
-
-/* Minute hand */
-
-.minute-hand {
-
-    height: 39%;
-
-    width: 3px;
-
-}
-
-
-/* Second hand */
-
-.second-hand {
-
-    height: 42%;
-
-    width: 1.5px;
-
-    opacity: 0.6;
-
-}
-
-
-/* =========================================
-   CLOCK NUMBERS
-========================================= */
-
-.number {
-
-    position: absolute;
-
-    font-size: clamp(
-        7px,
-        2vw,
-        10px
-    );
-
-    color: #db7d86;
-
-    transform:
-        translate(-50%, -50%);
-
-}
-
-
-/* 12 */
-
-.n12 {
-
-    top: 8%;
-    left: 50%;
-
-}
-
-
-/* 1 */
-
-.n1 {
-
-    top: 14%;
-    left: 71%;
-
-}
-
-
-/* 2 */
-
-.n2 {
-
-    top: 28%;
-    left: 86%;
-
-}
-
-
-/* 3 */
-
-.n3 {
-
-    top: 50%;
-    left: 93%;
-
-}
-
-
-/* 4 */
-
-.n4 {
-
-    top: 72%;
-    left: 86%;
-
-}
-
-
-/* 5 */
-
-.n5 {
-
-    top: 86%;
-    left: 71%;
-
-}
-
-
-/* 6 */
-
-.n6 {
-
-    top: 93%;
-    left: 50%;
-
-}
-
-
-/* 7 */
-
-.n7 {
-
-    top: 86%;
-    left: 29%;
-
-}
-
-
-/* 8 */
-
-.n8 {
-
-    top: 72%;
-    left: 14%;
-
-}
-
-
-/* 9 */
-
-.n9 {
-
-    top: 50%;
-    left: 7%;
-
-}
-
-
-/* 10 */
-
-.n10 {
-
-    top: 28%;
-    left: 14%;
-
-}
-
-
-/* 11 */
-
-.n11 {
-
-    top: 14%;
-    left: 29%;
-
-}
-
-
-/* =========================================
-   DIGITAL TIME
-========================================= */
-
-.clock-content {
-
-    position: absolute;
-
-    /*
-       Digital time goes underneath
-       the analog clock.
-    */
-
-    top: 67%;
-
-    left: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    width: 75%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    text-align: center;
-
-    color: #db7d86;
-
-}
-
-
-/* =========================================
-   TIME
-========================================= */
-
-.time {
-
-    font-size: clamp(
-        13px,
-        3.8vw,
-        22px
-    );
-
-    line-height: 1.2;
-
-    letter-spacing: 0.5px;
-
-    white-space: nowrap;
-
-    color: #db7d86;
-
-}
-
-
-/* =========================================
-   DATE
-========================================= */
-
-.date {
-
-    margin-top: 6px;
-
-    font-size: clamp(
-        5px,
-        1.5vw,
-        8px
-    );
-
-    line-height: 1.3;
-
-    white-space: nowrap;
-
-    color: #db7d86;
-
-}
-
-
-/* =========================================
-   TIME ZONE
-========================================= */
-
-.zone {
-
-    margin-top: 3px;
-
-    font-size: 5px;
-
-    white-space: nowrap;
-
-    color: #db7d86;
-
-    opacity: 0.7;
-
-}
-
-
-/* =========================================
-   DECORATION
-========================================= */
-
-.decor {
-
-    position: absolute;
-
-    left: 50%;
-
-    bottom: -18px;
-
-    transform:
-        translateX(-50%);
-
-    z-index: 5;
-
-    font-size: 10px;
-
-    white-space: nowrap;
-
-    color: #db7d86;
-
-}
-
-
-/* =========================================
-   SMALL SCREENS
-========================================= */
-
-@media (max-width: 450px) {
-
-    .heart {
-
-        width: 92vw;
-
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #191919;
+      --pink-color: #ffd6e1;
+      --font-family: 'Instrument Serif', Georgia, serif;
     }
 
-
-    .clock-content {
-
-        width: 65%;
-
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-
-    .analog-clock {
-
-        width: 40vw;
-
+    body {
+      background-color: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: var(--font-family);
+      overflow: hidden;
     }
 
-}
+    .widget {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 504px;
+    }
 
-</style>
+    .heart-clock-container {
+      position: relative;
+      width: 504px;
+      height: 486px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
+    .heart-svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      margin-top: -15px;
+      filter: drop-shadow(0px 0px 10px rgba(255, 214, 225, 0.45))
+              drop-shadow(0px 0px 24px rgba(255, 214, 225, 0.2));
+    }
+
+    .heart-svg path {
+      fill: none;
+      stroke: url(#heart-gradient);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .clock-face {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    /* 180deg Gradient Applied to Text */
+    .num {
+      position: absolute;
+      font-size: 24px;
+      font-family: var(--font-family);
+      user-select: none;
+      line-height: 1;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: linear-gradient(180deg, #ffffff 0%, #ffd6e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .num-12 { top: 0px;   left: 95px; }
+    .num-1  { top: 12px;  left: 140px; }
+    .num-2  { top: 45px;  left: 173px; }
+    .num-3  { top: 95px;  left: 185px; }
+    .num-4  { top: 145px; left: 173px; }
+    .num-5  { top: 178px; left: 140px; }
+    .num-6  { top: 190px; left: 95px; }
+    .num-7  { top: 178px; left: 50px; }
+    .num-8  { top: 145px; left: 17px; }
+    .num-9  { top: 95px;  left: 5px; }
+    .num-10 { top: 45px;  left: 17px; }
+    .num-11 { top: 12px;  left: 50px; }
+
+    /* Clock Hands updated to #ffd6e1 */
+    .hand {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform-origin: bottom center;
+      border-radius: 2px;
+      background-color: var(--pink-color);
+    }
+
+    .hour-hand {
+      width: 3.5px;
+      height: 50px;
+      margin-left: -1.75px;
+      z-index: 2;
+    }
+
+    .minute-hand {
+      width: 2.5px;
+      height: 72px;
+      margin-left: -1.25px;
+      opacity: 0.9;
+      z-index: 3;
+    }
+
+    .second-hand {
+      width: 1.5px;
+      height: 80px;
+      margin-left: -0.75px;
+      z-index: 4;
+    }
+
+    .center-pin {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: var(--pink-color);
+      border: 2px solid var(--bg-color);
+      border-radius: 50%;
+      z-index: 5;
+    }
+
+    /* Digital Display with 180deg Gradient */
+    .digital-time {
+      margin-top: -35px;
+      font-size: 44px;
+      font-family: var(--font-family);
+      letter-spacing: 1px;
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+      z-index: 10;
+
+      background: linear-gradient(180deg, #ffffff 0%, #ffd6e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0px 0px 12px rgba(255, 214, 225, 0.35));
+    }
+
+    .ampm {
+      font-size: 1.1em;
+      font-family: var(--font-family);
+    }
+  </style>
 </head>
-
-
 <body>
 
-
-<div class="clock-container">
-
-
-    <div class="heart">
-
-
-        <!-- =================================
-             HEART
-        ================================== -->
-
-        <svg
-            viewBox="0 0 200 180"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-        >
-
-            <path
-                class="heart-shape"
-                d="
-                    M100 170
-
-                    C90 160 20 115 20 55
-
-                    C20 25 43 8 68 8
-
-                    C84 8 96 17 100 32
-
-                    C104 17 116 8 132 8
-
-                    C157 8 180 25 180 55
-
-                    C180 115 110 160 100 170
-
-                    Z
-                "
-            />
-
-        </svg>
-
-
-
-        <!-- =================================
-             ANALOG CLOCK
-        ================================== -->
-
-        <div class="analog-clock">
-
-
-            <!-- Clock numbers -->
-
-            <div class="number n12">
-                12
-            </div>
-
-            <div class="number n1">
-                1
-            </div>
-
-            <div class="number n2">
-                2
-            </div>
-
-            <div class="number n3">
-                3
-            </div>
-
-            <div class="number n4">
-                4
-            </div>
-
-            <div class="number n5">
-                5
-            </div>
-
-            <div class="number n6">
-                6
-            </div>
-
-            <div class="number n7">
-                7
-            </div>
-
-            <div class="number n8">
-                8
-            </div>
-
-            <div class="number n9">
-                9
-            </div>
-
-            <div class="number n10">
-                10
-            </div>
-
-            <div class="number n11">
-                11
-            </div>
-
-
-            <!-- Hour -->
-
-            <div
-                class="hand hour-hand"
-                id="hourHand"
-            ></div>
-
-
-            <!-- Minute -->
-
-            <div
-                class="hand minute-hand"
-                id="minuteHand"
-            ></div>
-
-
-            <!-- Second -->
-
-            <div
-                class="hand second-hand"
-                id="secondHand"
-            ></div>
-
-
-            <!-- Center -->
-
-            <div class="center-dot"></div>
-
-
-        </div>
-
-
-
-        <!-- =================================
-             DIGITAL TIME
-        ================================== -->
-
-        <div class="clock-content">
-
-
-            <div
-                class="time"
-                id="time"
-            >
-                12:00:00 PM
-            </div>
-
-
-            <div
-                class="date"
-                id="date"
-            >
-                Saturday, August 29
-            </div>
-
-
-            <div class="zone">
-
-                GMT+8 ♡
-
-            </div>
-
-
-        </div>
-
-
-
-        <!-- =================================
-             DECORATION
-        ================================== -->
-
-        <div class="decor">
-
-            ♡ ִ (ˆᗜˆ) ִ ♡
-
-        </div>
-
-
+  <div class="widget">
+    <div class="heart-clock-container">
+      <svg class="heart-svg" viewBox="0 0 100 100">
+        <defs>
+          <!-- 180-degree SVG Linear Gradient -->
+          <linearGradient id="heart-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#ffd6e1" />
+          </linearGradient>
+        </defs>
+        <path d="M 50,30 
+                 C 50,15 15,12 15,40 
+                 C 15,60 45,85 50,91.3 
+                 C 55,85 85,60 85,40 
+                 C 85,12 50,15 50,30 Z" />
+      </svg>
+
+      <div class="clock-face">
+        <span class="num num-12">12</span>
+        <span class="num num-1">1</span>
+        <span class="num num-2">2</span>
+        <span class="num num-3">3</span>
+        <span class="num num-4">4</span>
+        <span class="num num-5">5</span>
+        <span class="num num-6">6</span>
+        <span class="num num-7">7</span>
+        <span class="num num-8">8</span>
+        <span class="num num-9">9</span>
+        <span class="num num-10">10</span>
+        <span class="num num-11">11</span>
+
+        <div class="hand hour-hand" id="hour"></div>
+        <div class="hand minute-hand" id="minute"></div>
+        <div class="hand second-hand" id="second"></div>
+        <div class="center-pin"></div>
+      </div>
     </div>
 
-
-</div>
-
-
-
-<script>
-
-/* =========================================
-   GMT+8 CLOCK
-========================================= */
-
-function updateClock() {
-
-
-    const now = new Date();
-
-
-    /*
-       Get GMT+8 time using
-       Asia/Manila.
-    */
-
-    const parts =
-        new Intl.DateTimeFormat(
-
-            "en-US",
-
-            {
-
-                timeZone:
-                    "Asia/Manila",
-
-                hour:
-                    "numeric",
-
-                minute:
-                    "numeric",
-
-                second:
-                    "numeric",
-
-                hour12:
-                    false
-
-            }
-
-        ).formatToParts(now);
-
-
-    let hour = 0;
-
-    let minute = 0;
-
-    let second = 0;
-
-
-    parts.forEach(
-        part => {
-
-            if (
-                part.type === "hour"
-            ) {
-
-                hour =
-                    parseInt(
-                        part.value
-                    );
-
-            }
-
-
-            if (
-                part.type === "minute"
-            ) {
-
-                minute =
-                    parseInt(
-                        part.value
-                    );
-
-            }
-
-
-            if (
-                part.type === "second"
-            ) {
-
-                second =
-                    parseInt(
-                        part.value
-                    );
-
-            }
-
-        }
-    );
-
-
-    /* =====================================
-       ANALOG HAND ANGLES
-    ====================================== */
-
-
-    const hourAngle =
-
-        (hour % 12) * 30
-        +
-        minute * 0.5;
-
-
-    const minuteAngle =
-
-        minute * 6
-        +
-        second * 0.1;
-
-
-    const secondAngle =
-
-        second * 6;
-
-
-    document
-        .getElementById("hourHand")
-        .style.transform =
-
-        `translateX(-50%)
-         rotate(${hourAngle}deg)`;
-
-
-    document
-        .getElementById("minuteHand")
-        .style.transform =
-
-        `translateX(-50%)
-         rotate(${minuteAngle}deg)`;
-
-
-    document
-        .getElementById("secondHand")
-        .style.transform =
-
-        `translateX(-50%)
-         rotate(${secondAngle}deg)`;
-
-
-
-    /* =====================================
-       DIGITAL TIME
-    ====================================== */
-
-
-    const time =
-
-        new Intl.DateTimeFormat(
-
-            "en-US",
-
-            {
-
-                timeZone:
-                    "Asia/Manila",
-
-                hour:
-                    "2-digit",
-
-                minute:
-                    "2-digit",
-
-                second:
-                    "2-digit",
-
-                hour12:
-                    true
-
-            }
-
-        ).format(now);
-
-
-    const date =
-
-        new Intl.DateTimeFormat(
-
-            "en-US",
-
-            {
-
-                timeZone:
-                    "Asia/Manila",
-
-                weekday:
-                    "long",
-
-                month:
-                    "long",
-
-                day:
-                    "numeric"
-
-            }
-
-        ).format(now);
-
-
-    document
-        .getElementById("time")
-        .textContent =
-        time;
-
-
-    document
-        .getElementById("date")
-        .textContent =
-        date;
-
-}
-
-
-/* =========================================
-   START
-========================================= */
-
-updateClock();
-
-
-/* Update every second */
-
-setInterval(
-    updateClock,
-    1000
-);
-
-</script>
-
-
+    <div class="digital-time">
+      <span id="digital-clock">--:--</span>
+      <span id="ampm" class="ampm">--</span>
+    </div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const options = { timeZone: 'Asia/Singapore', hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' };
+      const formatter = new Intl.DateTimeFormat([], options);
+      const parts = formatter.formatToParts(now);
+      
+      let hours = 0, minutes = 0, seconds = 0;
+      parts.forEach(part => {
+        if (part.type === 'hour') hours = parseInt(part.value, 10);
+        if (part.type === 'minute') minutes = parseInt(part.value, 10);
+        if (part.type === 'second') seconds = parseInt(part.value, 10);
+      });
+
+      const secondDeg = (seconds / 60) * 360;
+      const minuteDeg = ((minutes + seconds / 60) / 60) * 360;
+      const hourDeg = (((hours % 12) + minutes / 60) / 12) * 360;
+
+      document.getElementById('second').style.transform = `rotate(${secondDeg}deg)`;
+      document.getElementById('minute').style.transform = `rotate(${minuteDeg}deg)`;
+      document.getElementById('hour').style.transform = `rotate(${hourDeg}deg)`;
+
+      let displayHours = hours % 12;
+      displayHours = displayHours ? displayHours : 12;
+      const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+
+      document.getElementById('digital-clock').textContent = `${displayHours}:${displayMinutes}`;
+      document.getElementById('ampm').textContent = ampm;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
 </body>
 </html>
