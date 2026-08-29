@@ -22,29 +22,63 @@
       background-color: var(--bg-color);
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* Moved positioning higher up */
+      align-items: flex-start;
       min-height: 100vh;
       font-family: var(--font-family);
       overflow: hidden;
     }
 
-    /* Scaled down to 0.55 and shifted higher up */
     .widget-scaler {
       transform: scale(0.55);
       transform-origin: top center;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: -5px; /* Pulls clock higher up on page */
+      margin-top: -30px;
     }
 
     .widget {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       width: 504px;
     }
+
+    /* Sparkles Container Layered Behind Clock */
+    .sparkles-bg {
+      position: absolute;
+      top: -40px;
+      left: -60px;
+      width: 624px;
+      height: 580px;
+      pointer-events: none;
+      z-index: 0;
+      color: var(--pink-color);
+      font-family: var(--font-family);
+      user-select: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      opacity: 0.35;
+      text-shadow: 0 0 8px rgba(255, 214, 225, 0.4);
+    }
+
+    /* Individual Sparkle Placements */
+    .sp-1  { top: 5%;   left: 15%;  font-size: 20px; opacity: 0.45; }
+    .sp-2  { top: 12%;  left: 82%;  font-size: 14px; opacity: 0.3; }
+    .sp-3  { top: 20%;  left: 5%;   font-size: 12px; opacity: 0.25; }
+    .sp-4  { top: 28%;  left: 92%;  font-size: 22px; opacity: 0.4; }
+    .sp-5  { top: 40%;  left: 2%;   font-size: 18px; opacity: 0.35; }
+    .sp-6  { top: 48%;  left: 95%;  font-size: 10px; opacity: 0.25; }
+    .sp-7  { top: 62%;  left: 8%;   font-size: 24px; opacity: 0.4; }
+    .sp-8  { top: 70%;  left: 88%;  font-size: 16px; opacity: 0.3; }
+    .sp-9  { top: 82%;  left: 18%;  font-size: 12px; opacity: 0.25; }
+    .sp-10 { top: 88%;  left: 78%;  font-size: 20px; opacity: 0.35; }
+    .sp-11 { top: 2%;   left: 50%;  font-size: 10px; opacity: 0.2; }
+    .sp-12 { top: 94%;  left: 48%;  font-size: 14px; opacity: 0.3; }
 
     .heart-clock-container {
       position: relative;
@@ -53,6 +87,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 1;
     }
 
     .heart-svg {
@@ -61,7 +96,7 @@
       height: 100%;
       top: 0;
       left: 0;
-      margin-top: -15px;
+      margin-top: -10px;
       filter: drop-shadow(0px 0px 10px rgba(255, 214, 225, 0.45))
               drop-shadow(0px 0px 24px rgba(255, 214, 225, 0.2));
     }
@@ -183,6 +218,23 @@
 
   <div class="widget-scaler">
     <div class="widget">
+
+      <!-- Background Sparkles -->
+      <div class="sparkles-bg">
+        <span class="sparkle sp-1">✦</span>
+        <span class="sparkle sp-2">*</span>
+        <span class="sparkle sp-3">.</span>
+        <span class="sparkle sp-4">✦</span>
+        <span class="sparkle sp-5">˚</span>
+        <span class="sparkle sp-6">.</span>
+        <span class="sparkle sp-7">✦</span>
+        <span class="sparkle sp-8">*</span>
+        <span class="sparkle sp-9">˚</span>
+        <span class="sparkle sp-10">✦</span>
+        <span class="sparkle sp-11">.</span>
+        <span class="sparkle sp-12">*</span>
+      </div>
+
       <div class="heart-clock-container">
         <svg class="heart-svg" viewBox="0 0 100 100">
           <defs>
