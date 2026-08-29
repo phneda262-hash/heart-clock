@@ -28,6 +28,15 @@
       overflow: hidden;
     }
 
+    /* Scaled down container preserving exact internal proportions */
+    .widget-scaler {
+      transform: scale(0.75);
+      transform-origin: center center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .widget {
       display: flex;
       flex-direction: column;
@@ -75,7 +84,6 @@
       margin-top: 10px;
     }
 
-    /* 180deg Gradient Applied to Text */
     .num {
       position: absolute;
       font-size: 24px;
@@ -107,7 +115,6 @@
     .num-10 { top: 45px;  left: 17px; }
     .num-11 { top: 12px;  left: 50px; }
 
-    /* Clock Hands updated to #ffd6e1 */
     .hand {
       position: absolute;
       bottom: 50%;
@@ -149,7 +156,6 @@
       z-index: 5;
     }
 
-    /* Digital Display with 180deg Gradient */
     .digital-time {
       margin-top: -35px;
       font-size: 44px;
@@ -174,47 +180,48 @@
 </head>
 <body>
 
-  <div class="widget">
-    <div class="heart-clock-container">
-      <svg class="heart-svg" viewBox="0 0 100 100">
-        <defs>
-          <!-- 180-degree SVG Linear Gradient -->
-          <linearGradient id="heart-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" />
-            <stop offset="100%" stop-color="#ffd6e1" />
-          </linearGradient>
-        </defs>
-        <path d="M 50,30 
-                 C 50,15 15,12 15,40 
-                 C 15,60 45,85 50,91.3 
-                 C 55,85 85,60 85,40 
-                 C 85,12 50,15 50,30 Z" />
-      </svg>
+  <div class="widget-scaler">
+    <div class="widget">
+      <div class="heart-clock-container">
+        <svg class="heart-svg" viewBox="0 0 100 100">
+          <defs>
+            <linearGradient id="heart-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="100%" stop-color="#ffd6e1" />
+            </linearGradient>
+          </defs>
+          <path d="M 50,30 
+                   C 50,15 15,12 15,40 
+                   C 15,60 45,85 50,91.3 
+                   C 55,85 85,60 85,40 
+                   C 85,12 50,15 50,30 Z" />
+        </svg>
 
-      <div class="clock-face">
-        <span class="num num-12">12</span>
-        <span class="num num-1">1</span>
-        <span class="num num-2">2</span>
-        <span class="num num-3">3</span>
-        <span class="num num-4">4</span>
-        <span class="num num-5">5</span>
-        <span class="num num-6">6</span>
-        <span class="num num-7">7</span>
-        <span class="num num-8">8</span>
-        <span class="num num-9">9</span>
-        <span class="num num-10">10</span>
-        <span class="num num-11">11</span>
+        <div class="clock-face">
+          <span class="num num-12">12</span>
+          <span class="num num-1">1</span>
+          <span class="num num-2">2</span>
+          <span class="num num-3">3</span>
+          <span class="num num-4">4</span>
+          <span class="num num-5">5</span>
+          <span class="num num-6">6</span>
+          <span class="num num-7">7</span>
+          <span class="num num-8">8</span>
+          <span class="num num-9">9</span>
+          <span class="num num-10">10</span>
+          <span class="num num-11">11</span>
 
-        <div class="hand hour-hand" id="hour"></div>
-        <div class="hand minute-hand" id="minute"></div>
-        <div class="hand second-hand" id="second"></div>
-        <div class="center-pin"></div>
+          <div class="hand hour-hand" id="hour"></div>
+          <div class="hand minute-hand" id="minute"></div>
+          <div class="hand second-hand" id="second"></div>
+          <div class="center-pin"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="digital-time">
-      <span id="digital-clock">--:--</span>
-      <span id="ampm" class="ampm">--</span>
+      <div class="digital-time">
+        <span id="digital-clock">--:--</span>
+        <span id="ampm" class="ampm">--</span>
+      </div>
     </div>
   </div>
 
